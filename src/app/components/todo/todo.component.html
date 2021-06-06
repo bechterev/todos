@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+<div class='col-sm .bg-light'>
+    <form (submit)="addTodo($event)">
+        <label>title</label>
+        <br>
+    <input [(ngModel)]="todoElement.title" name='title'>
+    <br>
+        <label>description</label>
+        <br>
+    <input [(ngModel)]='todoElement.description' name='description'>
+    <br>
+    <select (change)="changeDay($event)">
+        <option value="today">today</option>
+        <option value="tomorrow">tomorrow</option>
+    </select>
+    <br>
+      <button  type="submit" class="btn btn-primary">Add Todo</button>
+    </form>
+</div>
+<div class='col-sm bg-secondary'> 
+    to Day
+    
+        <div *ngFor="let todo of todoList; let i=index" class="alert alert-light">
+            <span *ngIf="!todo.tomorrow">
+        <span [ngClass]="{'checked': todo.completed}">{{ todo.title }}</span>
+        <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+        <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+    </span>
+</div>
+<br>
+      <div class="btn btn-primary" (click)="selectedTodos()" *ngIf="todoList.length>0?findOnetoDay():false">set all complite</div>    
+</div>
+<div class='col-sm .bg-light'>  tomorrow
+    
+        <div *ngFor="let todo of todoList; let i=index" class="alert alert-light">
+            <span *ngIf="todo.tomorrow">
+        <span [ngClass]="{'checked': todo.completed}">{{ todo.title }}</span>
+        <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+        <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+    </span>
+</div>
+          
+</div>
+</div>
+</div>
